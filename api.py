@@ -13,7 +13,7 @@ import openai
 import logging
 from uuid import uuid4
 import re
-from diffusers import StableDiffusionPipeline
+# from diffusers import StableDiffusionPipeline
 
 # Setting up Flask app
 
