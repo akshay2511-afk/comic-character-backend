@@ -7,7 +7,7 @@ import os
 import requests
 import base64
 import io
-import torch
+# import torch
 from PIL import Image
 import openai
 import logging
@@ -25,8 +25,8 @@ logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 # Retrieve API keys from environment variables
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY") 
-HF_API_KEY = os.getenv("HF_API_KEY") 
+OPENAI_API_KEY = ("OPENAI_API_KEY") 
+HF_API_KEY = ("HF_API_KEY") 
 
 if not OPENAI_API_KEY:
     raise ValueError("OpenAI API key is not set. Please set it in the environment or directly in the code.")
@@ -259,10 +259,7 @@ def gen_comic_anime_image():
         return jsonify({"error": "Image generation failed due to content policy or other issue."}), 500
 
 
-@cross_origin()
-@app.route('/', methods=['GET'])
-def gen_comic_anime_image():
-    return "Api created succesfully"
+
 
 
 # Run the Flask app
