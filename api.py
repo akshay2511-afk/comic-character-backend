@@ -119,23 +119,23 @@ def dalle_2_image_gen(prompt: str, size="1024x1024"):
         return None
 
 # Function to generate image with Stable Diffusion v2 via Hugging Face
-def stable_diffusion_v2_image_gen(prompt: str):
-    try:
-        api_url = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-2"
-        headers = {"Authorization": f"Bearer {HF_API_KEY}"}
-        data = {"inputs": prompt}
+# def stable_diffusion_v2_image_gen(prompt: str):
+#     try:
+#         api_url = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-2"
+#         headers = {"Authorization": f"Bearer {HF_API_KEY}"}
+#         data = {"inputs": prompt}
         
-        response = requests.post(api_url, headers=headers, json=data)
+#         response = requests.post(api_url, headers=headers, json=data)
         
-        if response.status_code != 200:
-            logger.error(f"SD v2 API Error: {response.status_code} - {response.text}")
-            return None
+#         if response.status_code != 200:
+#             logger.error(f"SD v2 API Error: {response.status_code} - {response.text}")
+#             return None
         
-        return response.content
+#         return response.content
     
-    except Exception as e:
-        logger.error(f"Error in Stable Diffusion v2 image generation: {e}")
-        return None
+#     except Exception as e:
+#         logger.error(f"Error in Stable Diffusion v2 image generation: {e}")
+#         return None
 
 # Function to save image to disk and generate a URL
 def save_image_to_disk(image_bytes, image_name, model_name):
@@ -211,13 +211,13 @@ def get_style_prompt(description: str, style: str, size="1024x1024"):
         if dalle2_image_url:
             image_urls.append({"model": "DALL-E 2", "url": dalle2_image_url})
     
-    # 3. Stable Diffusion v2
-    sd_v2_prompt = f"{description}. Single character in {style} style."
-    sd_v2_image_data = stable_diffusion_v2_image_gen(sd_v2_prompt)
-    if sd_v2_image_data:
-        sd_v2_image_url = save_image_to_disk(sd_v2_image_data, image_name, "sd_v2")
-        if sd_v2_image_url:
-            image_urls.append({"model": "Stable Diffusion v2", "url": sd_v2_image_url})
+    # # 3. Stable Diffusion v2
+    # sd_v2_prompt = f"{description}. Single character in {style} style."
+    # sd_v2_image_data = stable_diffusion_v2_image_gen(sd_v2_prompt)
+    # if sd_v2_image_data:
+    #     sd_v2_image_url = save_image_to_disk(sd_v2_image_data, image_name, "sd_v2")
+    #     if sd_v2_image_url:
+    #         image_urls.append({"model": "Stable Diffusion v2", "url": sd_v2_image_url})
     
     return image_urls if image_urls else None
 
